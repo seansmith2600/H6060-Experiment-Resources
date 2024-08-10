@@ -212,7 +212,13 @@ on:
         description: Name of project to be scanned
         type: string
         required: false
-        
+
+      build-command:
+        description: Build command for Java application
+        type: string
+        required: false
+        default: mvn -Dmaven.test.skip=true clean install
+
       build-artifact:
         description: Name of build artifact
         type: string
@@ -393,9 +399,18 @@ jobs:
           files: "${{ env.CHECKOUT_PROJECT_REPO_PATH }}/${{ inputs.build-directory }}"
           fail: true
 
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Java Application
+        working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
+        run: ${{ inputs.build-command }}
+
       - name: Set SonarQube Environment Variables
         if: ${{ matrix.os == 'ubuntu-22.04' || matrix.os == 'macos-14' }}
-        shell: bash
         run: |
           if [[ "${{ matrix.os }}" == "ubuntu-22.04" ]]; then
               echo "SONARQUBE_TOKEN=${{ secrets.sonarqube-token-ubuntu }}" >> $GITHUB_ENV
@@ -460,6 +475,16 @@ jobs:
         with:
           files: "${{ env.CHECKOUT_PROJECT_REPO_PATH }}/${{ inputs.build-directory }}"
           fail: true
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Java Application
+        working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
+        run: ${{ inputs.build-command }}
 
       - name: Run Eclipse Steady - ${{ matrix.os }}
         uses: ./experiment-resources-repository/.github/actions/sca/eclipse-steady/java
@@ -611,8 +636,7 @@ jobs:
 
   create-cyclonedx-osv-report:
     name: Create CycloneDX OSV Report
-    if: false
-#    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
+    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
     needs: [
       sca-eclipse-steady,
       sca-grype,
@@ -654,8 +678,7 @@ jobs:
 
   create-github-repository-information-report:
     name: Create GitHub Repository Information Report
-    #if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
-    if: false
+    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
     needs: [
       sast-codeql,
       sast-horusec,
@@ -723,13 +746,12 @@ jobs:
 
       - name: Set SonarQube Environment Variables
         if: ${{ matrix.os == 'ubuntu-22.04' || matrix.os == 'macos-14' }}
-        shell: bash
         run: |
           if [[ "${{ matrix.os }}" == "ubuntu-22.04" ]]; then
-              echo "SONARQUBE_TOKEN=${{ secrets.sonarqube-user-token-ubuntu }}" >> $GITHUB_ENV
+              echo "SONARQUBE_USER_TOKEN=${{ secrets.sonarqube-user-token-ubuntu }}" >> $GITHUB_ENV
               echo "SONARQUBE_URL=${{ secrets.sonarqube-url-ubuntu }}" >> $GITHUB_ENV
           else
-              echo "SONARQUBE_TOKEN=${{ secrets.sonarqube-user-token-macos }}" >> $GITHUB_ENV
+              echo "SONARQUBE_USER_TOKEN=${{ secrets.sonarqube-user-token-macos }}" >> $GITHUB_ENV
               echo "SONARQUBE_URL=${{ secrets.sonarqube-url-macos }}" >> $GITHUB_ENV
           fi
 
@@ -742,7 +764,6 @@ jobs:
 
       # Eclipse Steady only supports Ubuntu
       - name: Set Eclipse Steady Environment Variable
-        shell: bash
         run: |
           if [[ "${{ inputs.sca-eclipse-steady-enabled }}" == "true" && "${{ matrix.os }}" == "ubuntu-22.04" ]]; then
               echo "SCA_ECLIPSE_STEADY_REPORT_FILENAME=sca-eclipse-steady-report-${{ matrix.os }}/vulas-report.json" >> $GITHUB_ENV
@@ -752,7 +773,6 @@ jobs:
 
       # Grype only supports Ubuntu and MacOS
       - name: Set Grype Environment Variable
-        shell: bash
         run: |
           if [[ "${{ inputs.sca-grype-enabled }}" == "true" && "${{ matrix.os }}" != "windows-2022" ]]; then
               echo "SCA_GRYPE_REPORT_FILENAME=sca-grype-report-${{ matrix.os }}/results.json" >> $GITHUB_ENV
@@ -762,7 +782,6 @@ jobs:
 
       # Remaining application environment variables
       - name: Set Remaining Environment Variables
-        shell: bash
         if: ${{ matrix.os != 'windows-2022' }}
         run: |
           # CodeQL
@@ -815,8 +834,8 @@ jobs:
           fi
 
       - name: Set Remaining Environment Variables
-        shell: pwsh
         if: ${{ matrix.os == 'windows-2022' }}
+        shell: pwsh
         run: |
           # CodeQL
           if ("${{ inputs.sast-codeql-enabled }}" -eq "true") {
