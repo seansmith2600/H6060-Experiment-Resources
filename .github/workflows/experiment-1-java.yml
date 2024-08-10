@@ -251,10 +251,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -289,10 +285,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -322,10 +314,6 @@ jobs:
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.semgrep-app-token }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -356,10 +344,6 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.snyk-token }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -386,10 +370,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -571,10 +551,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Current GitHub Repository
         uses: actions/checkout@v4
         with:
@@ -622,10 +598,6 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.snyk-token }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -676,10 +648,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Current GitHub Repository
         uses: actions/checkout@v4
         with:
@@ -726,10 +694,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Current GitHub Repository
         uses: actions/checkout@v4
         with:
@@ -765,10 +729,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Current GitHub Repository
         uses: actions/checkout@v4
         with:
@@ -964,10 +924,6 @@ jobs:
         os: [ ubuntu-22.04, windows-2022, macos-14 ]
     runs-on: ${{ matrix.os }}
     steps:
-      # See https://github.com/orgs/community/discussions/26952
-      - name: Support longpaths
-        run: git config --system core.longpaths true
-
       - name: Checkout Current GitHub Repository
         uses: actions/checkout@v4
         with:
