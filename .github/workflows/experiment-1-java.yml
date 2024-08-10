@@ -649,6 +649,7 @@ jobs:
           cyclonedx-sbom-filename: sbom.json
           artifact-name: cyclonedx-sbom-osv-report-${{ matrix.os }}
           include-unit-tests: false
+          path: .
 
   create-github-repository-information-report:
     name: Create GitHub Repository Information Report
@@ -713,6 +714,7 @@ jobs:
       - name: Download All Build Artifacts
         uses: dawidd6/action-download-artifact@v6
         with:
+          path: ./.github/actions/reporting/vulnerability-results-report/automated
           github_token: ${{ secrets.github-token }}
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: ""
