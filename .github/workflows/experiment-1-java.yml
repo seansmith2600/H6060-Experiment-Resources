@@ -611,7 +611,8 @@ jobs:
 
   create-cyclonedx-osv-report:
     name: Create CycloneDX OSV Report
-    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
+#    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
+    if: false
     needs: [
       sca-eclipse-steady,
       sca-grype,
@@ -816,49 +817,49 @@ jobs:
         if: ${{ matrix.os == 'windows-2022' }}
         run: |
           # CodeQL
-          if ($env:INPUT_SAST_CODEQL_ENABLED -eq "true") {
+          if ("${{ inputs.sast-codeql-enabled }}" -eq "true") {
               echo "SAST_CODEQL_CSV_RESULT_FILENAME=sast-codeql-vulnerability-result.csv" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SAST_CODEQL_CSV_RESULT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          
+
           # Horusec
-          if ($env:INPUT_SAST_HORUSEC_ENABLED -eq "true") {
+          if ("${{ inputs.sast-horusec-enabled }}" -eq "true") {
               echo "SAST_HORUSEC_REPORT_FILENAME=sast-horusec-report-${{ matrix.os }}/horusec-report.json" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SAST_HORUSEC_REPORT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          
+
           # Semgrep
-          if ($env:INPUT_SAST_SEMGREP_ENABLED -eq "true") {
+          if ("${{ inputs.sast-semgrep-enabled }}" -eq "true") {
               echo "SAST_SEMGREP_REPORT_FILENAME=sast-semgrep-report-${{ matrix.os }}/semgrep-report.json" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SAST_SEMGREP_REPORT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          
+
           # Snyk Code
-          if ($env:INPUT_SAST_SNYK_CODE_ENABLED -eq "true") {
+          if ("${{ inputs.sast-snyk-code-enabled }}" -eq "true") {
               echo "SAST_SNYK_CODE_REPORT_FILENAME=sast-snyk-code-report-${{ matrix.os }}/snyk-code-report.json" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SAST_SNYK_CODE_REPORT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          
+
           # SonarQube
-          if ($env:INPUT_SAST_SONARQUBE_ENABLED -eq "true") {
+          if ("${{ inputs.sast-sonarqube-enabled }}" -eq "true") {
               echo "SAST_SONARQUBE_CSV_RESULT_FILENAME=sast-sonarqube-vulnerability-result.csv" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SAST_SONARQUBE_CSV_RESULT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          
+
           # OWASP Dependency Check
-          if ($env:INPUT_SCA_OWASP_DEPENDENCY_CHECK_ENABLED -eq "true") {
+          if ("${{ inputs.sca-owasp-dependency-check-enabled }}" -eq "true") {
               echo "SCA_OWASP_DEPENDENCY_CHECK_REPORT_FILENAME=sca-owasp-dependency-check-report-${{ matrix.os }}/dependency-check-report.json" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SCA_OWASP_DEPENDENCY_CHECK_REPORT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          
+
           # Snyk
-          if ($env:INPUT_SCA_SNYK_ENABLED -eq "true") {
+          if ("${{ inputs.sca-snyk-enabled }}" -eq "true") {
               echo "SCA_SNYK_REPORT_FILENAME=sca-snyk-report-${{ matrix.os }}/snyk-report.json" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
               echo "SCA_SNYK_REPORT_FILENAME=" | Out-File -FilePath $env:GITHUB_ENV -Append

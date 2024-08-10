@@ -43,7 +43,6 @@ The script supports the parsing of CycloneDX SBOM v1.5 and v1.6 schemas.
 | **cyclonedx-sbom-filename**            | true     | string |                               | Name of CycloneDX SBOM JSON report                  |
 | **csv-report-filename**                | false    | string | cyclonedx_sbom_osv_report.csv | Name of the CSV report filename                     |
 | **artifact-name**                      | false    | string | cyclonedx-sbom-osv            | Name of the artifact to upload                      |
-| **path**                               | false    | string | experiment-resources          | Path to the project root directory                  |
 | **include-unit-tests**                 | false    | string | false                         | Whether to run action unit tests                    |
 
 ## Build Artifacts

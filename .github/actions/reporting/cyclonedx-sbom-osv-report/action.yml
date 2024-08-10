@@ -100,11 +100,6 @@ inputs:
     required: false
     default: cyclonedx-sbom-osv-report
 
-  path:
-    description: Directory to run the action
-    type: string
-    required: false
-
   include-unit-tests:
     description: Run unit tests in the action (for testing use only)
     type: string # See https://github.com/actions/runner/issues/2238
@@ -160,7 +155,7 @@ runs:
           if [[ "${{ inputs.experiment-runner-operating-system }}" == "Linux" || "${{ inputs.experiment-runner-operating-system }}" == "macOS" ]]; then
               GITHUB_ACTION_NEW_PATH=$(python -c "print('${{ github.action_path }}'.replace('./', ''))")
           else
-              GITHUB_ACTION_NEW_PATH="${{ inputs.path }}/.github/actions/reporting/cyclonedx-sbom-osv-report"
+              GITHUB_ACTION_NEW_PATH="${{ github.workspace }}/.github/actions/reporting/cyclonedx-sbom-osv-report"
           fi
           echo "GITHUB_ACTION_NEW_PATH=$GITHUB_ACTION_NEW_PATH" >> $GITHUB_ENV
 
