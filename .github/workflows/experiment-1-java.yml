@@ -674,7 +674,6 @@ jobs:
           cyclonedx-sbom-filename: sbom.json
           artifact-name: cyclonedx-sbom-osv-report-${{ matrix.os }}
           include-unit-tests: false
-          path: .
 
   create-github-repository-information-report:
     name: Create GitHub Repository Information Report
