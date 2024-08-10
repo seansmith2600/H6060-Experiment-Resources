@@ -175,30 +175,31 @@ The following inputs are supported for the GitHub workflows:
 
 ### experiment-1-java.yml
 
-| name                                          | required | type    | default    | description                                             |
-|-----------------------------------------------|----------|---------|------------|---------------------------------------------------------|
-| **sast-codeql-enabled**                       | false    | boolean | true       | Enable CodeQL scan (SAST)                               |
-| **sast-horusec-enabled**                      | false    | boolean | true       | Enable Horusec scan (SAST)                              |
-| **sast-semgrep-enabled**                      | false    | boolean | true       | Enable Semgrep scan (SAST)                              |
-| **sast-sonarqube-enabled**                    | false    | boolean | true       | Enable SonarQube scan (SAST)                            |
-| **sast-snyk-code-enabled**                    | false    | boolean | true       | Enable Snyk Code scan (SAST)                            |
-| **sca-eclipse-steady-enabled**                | false    | boolean | true       | Enable Eclipse Steady scan (SCA)                        |
-| **sca-grype-enabled**                         | false    | boolean | true       | Enable Grype scan (SCA)                                 |
-| **sca-owasp-dependency-check-enabled**        | false    | boolean | true       | Enable OWASP Dependency Check scan (SCA)                |
-| **sca-snyk-enabled**                          | false    | boolean | true       | Enable Snyk scan (SCA)                                  |
-| **reporting-enabled**                         | false    | boolean | true       | Enable reporting of scan results                        |
-| **eclipse-steady-workspace-token**            | false    | string  |            | Token used to identify project workspace                |
-| **eclipse-steady-application-group-id**       | false    | string  |            | Group ID of the application                             |
-| **eclipse-steady-application-artifact-id**    | false    | string  |            | Artifact ID of the application                          |
-| **eclipse-steady-application-version**        | false    | string  |            | Version of the application                              |
-| **eclipse-steady-project-source-directories** | false    | string  |            | Project source directories to scan (separated by comma) |
-| **horusec-files-or-paths-to-ignore**          | false    | string  | **/test/** | Files or paths to ignore during the Horusec scan        |
-| **semgrep-files-or-paths-to-ignore**          | false    | string  | test,tests | Files or paths to ignore during the Semgrep scan        |
-| **java-version**                              | false    | string  | 17         | Java version to install                                 |
-| **java-distribution**                         | false    | string  | temurin    | Java distribution to install                            |
-| **project-name**                              | false    | string  |            | Name of project to be scanned                           |
-| **build-artifact**                            | false    | string  |            | Name of project build artifact                          |
-| **build-directory**                           | false    | string  |            | Name of project build directory                         |
+| name                                          | required | type    | default                                  | description                                             |
+|-----------------------------------------------|----------|---------|------------------------------------------|---------------------------------------------------------|
+| **sast-codeql-enabled**                       | false    | boolean | true                                     | Enable CodeQL scan (SAST)                               |
+| **sast-horusec-enabled**                      | false    | boolean | true                                     | Enable Horusec scan (SAST)                              |
+| **sast-semgrep-enabled**                      | false    | boolean | true                                     | Enable Semgrep scan (SAST)                              |
+| **sast-sonarqube-enabled**                    | false    | boolean | true                                     | Enable SonarQube scan (SAST)                            |
+| **sast-snyk-code-enabled**                    | false    | boolean | true                                     | Enable Snyk Code scan (SAST)                            |
+| **sca-eclipse-steady-enabled**                | false    | boolean | true                                     | Enable Eclipse Steady scan (SCA)                        |
+| **sca-grype-enabled**                         | false    | boolean | true                                     | Enable Grype scan (SCA)                                 |
+| **sca-owasp-dependency-check-enabled**        | false    | boolean | true                                     | Enable OWASP Dependency Check scan (SCA)                |
+| **sca-snyk-enabled**                          | false    | boolean | true                                     | Enable Snyk scan (SCA)                                  |
+| **reporting-enabled**                         | false    | boolean | true                                     | Enable reporting of scan results                        |
+| **eclipse-steady-workspace-token**            | false    | string  |                                          | Token used to identify project workspace                |
+| **eclipse-steady-application-group-id**       | false    | string  |                                          | Group ID of the application                             |
+| **eclipse-steady-application-artifact-id**    | false    | string  |                                          | Artifact ID of the application                          |
+| **eclipse-steady-application-version**        | false    | string  |                                          | Version of the application                              |
+| **eclipse-steady-project-source-directories** | false    | string  |                                          | Project source directories to scan (separated by comma) |
+| **horusec-files-or-paths-to-ignore**          | false    | string  | **/test/**                               | Files or paths to ignore during the Horusec scan        |
+| **semgrep-files-or-paths-to-ignore**          | false    | string  | test,tests                               | Files or paths to ignore during the Semgrep scan        |
+| **java-version**                              | false    | string  | 17                                       | Java version to install                                 |
+| **java-distribution**                         | false    | string  | temurin                                  | Java distribution to install                            |
+| **project-name**                              | false    | string  |                                          | Name of project to be scanned                           |
+| **build-command**                             | false    | string  | mvn -Dmaven.test.skip=true clean install | Build command for Java application Maven scan           |
+| **build-artifact**                            | false    | string  |                                          | Name of project build artifact                          |
+| **build-directory**                           | false    | string  |                                          | Name of project build directory                         |
 
 ### experiment-2-python.yml
 
