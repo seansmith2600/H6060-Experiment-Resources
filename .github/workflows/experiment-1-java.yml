@@ -611,7 +611,8 @@ jobs:
 
   create-cyclonedx-osv-report:
     name: Create CycloneDX OSV Report
-    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
+    if: false
+#    if: ${{ inputs.reporting-enabled == true && ! failure() && ! cancelled() }}
     needs: [
       sca-eclipse-steady,
       sca-grype,
