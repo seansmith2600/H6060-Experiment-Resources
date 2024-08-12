@@ -48,11 +48,14 @@ runs:
           --json-file-output=snyk-code-report.json || EXIT_CODE=$?
         if [ $EXIT_CODE -eq 1 ]; then exit 0; fi
 
+    # Snyk Code does not create JSON report if no vulnerabilities are discovered
     - name: Create Dummy Snyk Code Report
       if: ${{ runner.os != 'Windows' }}
       shell: bash
       working-directory: ${{ inputs.path }}
-      run: if [[ ! -f snyk-code-report.json ]]; then echo '{"vulnerabilities":[]}' > snyk-code-report.json; fi
+      run: |
+        if [[ ! -f snyk-code-report.json ]]; then 
+          echo '{"version":"2.1.0","runs":[{"tool":{"driver":{"name":"SnykCode","semanticVersion":"1.0.0","version":"1.0.0","rules":[]}},"results":[]}]}' > snyk-code-report.json; fi
 
     - name: Create Dummy Snyk Code Report
       if: ${{ runner.os == 'Windows' }}
@@ -60,7 +63,7 @@ runs:
       working-directory: ${{ inputs.path }}
       run: |
         if (!(Test-Path snyk-code-report.json)) {
-          echo '{"vulnerabilities":[]}' > snyk-code-report.json
+          echo '{"version":"2.1.0","runs":[{"tool":{"driver":{"name":"SnykCode","semanticVersion":"1.0.0","version":"1.0.0","rules":[]}},"results":[]}]}' > snyk-code-report.json
         }
 
     - name: Upload Snyk Report
