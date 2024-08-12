@@ -402,8 +402,8 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: ${{ inputs.java-version }}
+          distribution: ${{ inputs.java-distribution }}
 
       - name: Build Java Application
         working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
@@ -479,8 +479,8 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: ${{ inputs.java-version }}
+          distribution: ${{ inputs.java-distribution }}
 
       - name: Build Java Application
         working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
