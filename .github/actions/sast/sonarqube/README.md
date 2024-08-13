@@ -36,6 +36,7 @@ An action to configure and run a SonarQube SAST scan.
 | **sonarqube-username**    | true     | string |                         | Username for logging into SonarQube            |
 | **sonarqube-password**    | true     | string |                         | Password for logging into SonarQube            |
 | **sonarqube-project-key** | true     | string |                         | Project key being scanned by SonarQube         |
+| **sonarqube-sources**     | false    | string |                         | Source code directory to scan                  |
 | **artifact-name**         | false    | string | sast-sonarqube-report   | Name of the artifact to upload                 |
 | **path**                  | false    | string | ${{ github.workspace }} | Path to run the SonarQube scan                 |
 

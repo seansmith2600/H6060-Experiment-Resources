@@ -122,10 +122,10 @@ The workflow can be triggered using the following example snippet:
       eclipse-steady-application-artifact-id: my-project
       eclipse-steady-application-version: 1.0.0
       eclipse-steady-project-source-directories: src
+      sonarqube-sources: src
       project-name: my-project
       build-artifact: python-build
       build-directory: dist
-
 
   javascript-scanning:
     needs: build-application
@@ -244,6 +244,7 @@ The following inputs are supported for the GitHub workflows:
 | **eclipse-steady-project-source-directories** | false    | string  |            | Project source directories to scan (separated by comma) |
 | **horusec-files-or-paths-to-ignore**          | false    | string  | **/test/** | Files or paths to ignore during the Horusec scan        |
 | **semgrep-files-or-paths-to-ignore**          | false    | string  | test,tests | Files or paths to ignore during the Semgrep scan        |
+| **sonarqube-sources**                         | false    | string  | src        | Source code directory to scan                           |
 | **python-version**                            | false    | string  | 3.8        | Python version to install                               |
 | **project-name**                              | false    | string  |            | Name of project to be scanned                           |
 | **build-artifact**                            | false    | string  |            | Name of project build artifact                          |
