@@ -94,16 +94,38 @@ The workflow can be triggered using the following example snippet:
     needs: build-application
     name: Run Python Scanning Workflow
     uses: seansmith2600/H6060-Experiment-Workflows/.github/workflows/experiment-2-python.yml@main
-    secrets: inherit
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      github-api-token: ${{ secrets.GIT_API_TOKEN }}
+      nvd-api-key: ${{ secrets.NVD_API_KEY }}
+      opencve-username: ${{ secrets.OPENCVE_USERNAME }}
+      opencve-password: ${{ secrets.OPENCVE_PASSWORD }}
+      honeycomb-api-key: ${{ secrets.HONEYCOMB_API_KEY }}
+      eclipse-steady-host-url: ${{ secrets.ECLIPSE_STEADY_HOST_URL }}
+      deepsource-api-key: ${{ secrets.DEEPSOURCE_API_KEY }}
+      semgrep-app-token: ${{ secrets.SEMGREP_APP_TOKEN }}
+      snyk-token: ${{ secrets.SNYK_TOKEN }}
+      sonarqube-username: ${{ secrets.SONARQUBE_USERNAME }}
+      sonarqube-password: ${{ secrets.SONARQUBE_PASSWORD }}
+      sonarqube-token-ubuntu: ${{ secrets.SONARQUBE_TOKEN_UBUNTU }}
+      sonarqube-token-macos: ${{ secrets.SONARQUBE_TOKEN_MACOS }}
+      sonarqube-token-windows: ${{ secrets.SONARQUBE_TOKEN_WINDOWS }}
+      sonarqube-user-token-ubuntu: ${{ secrets.SONARQUBE_USER_TOKEN_UBUNTU }}
+      sonarqube-user-token-macos: ${{ secrets.SONARQUBE_USER_TOKEN_MACOS }}
+      sonarqube-user-token-windows: ${{ secrets.SONARQUBE_USER_TOKEN_WINDOWS }}
+      sonarqube-url-ubuntu: ${{ secrets.SONARQUBE_URL_UBUNTU }}
+      sonarqube-url-macos: ${{ secrets.SONARQUBE_URL_MACOS }}
+      sonarqube-url-windows: ${{ secrets.SONARQUBE_URL_WINDOWS }}
     with:
-      operating-system: ubuntu-22.04
-      project-name: H6060-Python-Pillow
-      build-directory: dist
       eclipse-steady-workspace-token: 1111-2222-3333-4444
       eclipse-steady-application-group-id: com.example
       eclipse-steady-application-artifact-id: my-project
       eclipse-steady-application-version: 1.0.0
       eclipse-steady-project-source-directories: src
+      project-name: my-project
+      build-artifact: python-build
+      build-directory: dist
+
 
   javascript-scanning:
     needs: build-application
@@ -205,26 +227,27 @@ The following inputs are supported for the GitHub workflows:
 
 | name                                          | required | type    | default    | description                                             |
 |-----------------------------------------------|----------|---------|------------|---------------------------------------------------------|
-| **operating-system**                          | true     | string  |            | Operating system to run the GitHub Workflow             |
 | **sast-codeql-enabled**                       | false    | boolean | true       | Enable CodeQL scan (SAST)                               |
 | **sast-horusec-enabled**                      | false    | boolean | true       | Enable Horusec scan (SAST)                              |
 | **sast-semgrep-enabled**                      | false    | boolean | true       | Enable Semgrep scan (SAST)                              |
 | **sast-sonarqube-enabled**                    | false    | boolean | true       | Enable SonarQube scan (SAST)                            |
 | **sast-snyk-code-enabled**                    | false    | boolean | true       | Enable Snyk Code scan (SAST)                            |
 | **sca-eclipse-steady-enabled**                | false    | boolean | true       | Enable Eclipse Steady scan (SCA)                        |
-| **sca-snyk-enabled**                          | false    | boolean | true       | Enable Snyk scan (SCA)                                  |
-| **sca-owasp-dependency-check-enabled**        | false    | boolean | true       | Enable OWASP Dependency Check scan (SCA)                |
 | **sca-grype-enabled**                         | false    | boolean | true       | Enable Grype scan (SCA)                                 |
-| **project-name**                              | false    | string  |            | Name of project to be scanned                           |
-| **project-build-artifact**                    | false    | string  |            | Name of project build artifact                          |
-| **project-build-directory**                   | false    | string  |            | Name of project build directory                         |
-| **horusec-files-or-paths-to-ignore**          | false    | string  | **/test/** | Files or paths to ignore during the Horusec scan        |
-| **semgrep-files-or-paths-to-ignore**          | false    | string  | test,tests | Files or paths to ignore during the Semgrep scan        |
+| **sca-owasp-dependency-check-enabled**        | false    | boolean | true       | Enable OWASP Dependency Check scan (SCA)                |
+| **sca-snyk-enabled**                          | false    | boolean | true       | Enable Snyk scan (SCA)                                  |
+| **reporting-enabled**                         | false    | boolean | true       | Enable reporting of scan results                        |
 | **eclipse-steady-workspace-token**            | false    | string  |            | Token used to identify project workspace                |
 | **eclipse-steady-application-group-id**       | false    | string  |            | Group ID of the application                             |
 | **eclipse-steady-application-artifact-id**    | false    | string  |            | Artifact ID of the application                          |
 | **eclipse-steady-application-version**        | false    | string  |            | Version of the application                              |
 | **eclipse-steady-project-source-directories** | false    | string  |            | Project source directories to scan (separated by comma) |
+| **horusec-files-or-paths-to-ignore**          | false    | string  | **/test/** | Files or paths to ignore during the Horusec scan        |
+| **semgrep-files-or-paths-to-ignore**          | false    | string  | test,tests | Files or paths to ignore during the Semgrep scan        |
+| **python-version**                            | false    | string  | 3.8        | Python version to install                               |
+| **project-name**                              | false    | string  |            | Name of project to be scanned                           |
+| **build-artifact**                            | false    | string  |            | Name of project build artifact                          |
+| **build-directory**                           | false    | string  |            | Name of project build directory                         |
 
 ### experiment-3-javascript.yml
 

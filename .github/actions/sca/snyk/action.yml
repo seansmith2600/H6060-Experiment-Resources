@@ -44,6 +44,7 @@ runs:
 
     # Java and JavaScript Snyk scan
     - name: Perform Snyk Test Analysis
+      if: ${{ inputs.programming-language != 'python' }}
       shell: bash
       working-directory: ${{ inputs.path }}
       run: |
@@ -57,6 +58,7 @@ runs:
         if [[ $EXIT_CODE -eq 1 ]]; then exit 0; fi
 
     - name: Perform Snyk Monitor Analysis
+      if: ${{ inputs.programming-language != 'python' }}
       shell: bash
       working-directory: ${{ inputs.path }}
       run: |
