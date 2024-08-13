@@ -196,6 +196,12 @@ on:
         default: "test,tests"
 
       # Extra inputs
+      python-version:
+        description: Python version to use
+        type: string
+        required: false
+        default: 3.8
+
       project-name:
         description: Name of project to be scanned
         type: string
@@ -441,6 +447,17 @@ jobs:
           files: "${{ env.CHECKOUT_PROJECT_REPO_PATH }}/${{ inputs.build-directory }}"
           fail: true
 
+      - name: Install Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install Python Dependencies
+        working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Run Eclipse Steady - ${{ matrix.os }}
         uses: ./experiment-resources-repository/.github/actions/sca/eclipse-steady/python
         with:
@@ -492,6 +509,17 @@ jobs:
           files: "${{ env.CHECKOUT_PROJECT_REPO_PATH }}/${{ inputs.build-directory }}"
           fail: true
 
+      - name: Install Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install Python Dependencies
+        working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Run Grype - ${{ matrix.os }}
         uses: ./experiment-resources-repository/.github/actions/sca/grype
         with:
@@ -534,6 +562,17 @@ jobs:
         with:
           files: "${{ env.CHECKOUT_PROJECT_REPO_PATH }}/${{ inputs.build-directory }}"
           fail: true
+
+      - name: Install Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install Python Dependencies
+        working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run OWASP Dependency Check - ${{ matrix.os }}
         uses: ./experiment-resources-repository/.github/actions/sca/owasp-dependency-check
@@ -581,6 +620,17 @@ jobs:
         with:
           files: "${{ env.CHECKOUT_PROJECT_REPO_PATH }}/${{ inputs.build-directory }}"
           fail: true
+
+      - name: Install Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install Python Dependencies
+        working-directory: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run Snyk - ${{ matrix.os }}
         uses: ./experiment-resources-repository/.github/actions/sca/snyk
