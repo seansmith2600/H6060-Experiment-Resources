@@ -59,14 +59,14 @@ runs:
         files: ${{ inputs.path }}
         fail: true
 
-    - name: Setup Sonar Scanner
-      uses: Warchant/setup-sonar-scanner@v8
-
     - name: Setup Java JDK
       uses: actions/setup-java@v4.2.1
       with:
         distribution: temurin
         java-version: 17
+
+    - name: Setup Sonar Scanner
+      uses: Warchant/setup-sonar-scanner@v8
 
     # Perform Java analysis
     - name: Perform SonarQube Analysis
