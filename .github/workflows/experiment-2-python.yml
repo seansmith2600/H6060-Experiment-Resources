@@ -209,6 +209,13 @@ on:
         required: false
         default: 3.8
 
+      # Extra inputs
+      python-version:
+        description: Python version to use
+        type: string
+        required: false
+        default: 3.8
+
       project-name:
         description: Name of project to be scanned
         type: string
