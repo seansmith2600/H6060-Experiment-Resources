@@ -106,7 +106,8 @@ runs:
           -Dsonar.host.url=${{ inputs.sonarqube-url }} \
           -Dsonar.projectKey=${{ inputs.sonarqube-project-key }} \
           -Dsonar.projectName=${{ inputs.sonarqube-project-key }} \
-          -Dsonar.sources=${{ inputs.sonarqube-sources }}
+          -Dsonar.sources=${{ inputs.sonarqube-sources }} \
+          -Dsonar.projectBaseDir=${{ inputs.path }}
 
     # Perform non-Java analysis on Windows 2022
     - name: Perform SonarQube Analysis
@@ -118,7 +119,8 @@ runs:
         -D"sonar.host.url=${{ inputs.sonarqube-url }}" `
         -D"sonar.projectKey=${{ inputs.sonarqube-project-key }}" `
         -D"sonar.projectName=${{ inputs.sonarqube-project-key }}" `
-        -D"sonar.sources=${{ inputs.sonarqube-sources }}"
+        -D"sonar.sources=${{ inputs.sonarqube-sources }}" `
+        -D"sonar.projectBaseDir=${{ inputs.path }}"
 
     - name: Download SonarQube Report
       shell: bash
