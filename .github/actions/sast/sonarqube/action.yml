@@ -33,6 +33,11 @@ inputs:
     type: string
     required: true
 
+  sonarqube-sources:
+    description: Source directories to scan (separated by comma)
+    type: string
+    required: true
+
   artifact-name:
     description: Name of the artifact to upload
     type: string
@@ -89,6 +94,7 @@ runs:
         args: >
           -Dsonar.projectKey=${{ inputs.sonarqube-project-key }}
           -Dsonar.projectName=${{ inputs.sonarqube-project-key }}
+          -Dsonar.sources=${{ inputs.sonarqube-sources }}
 
     # Perform non-Java analysis on MacOS 14
     - name: Perform SonarQube Analysis
@@ -99,7 +105,8 @@ runs:
           -Dsonar.login=${{ inputs.sonarqube-token }} \
           -Dsonar.host.url=${{ inputs.sonarqube-url }} \
           -Dsonar.projectKey=${{ inputs.sonarqube-project-key }} \
-          -Dsonar.projectName=${{ inputs.sonarqube-project-key }}
+          -Dsonar.projectName=${{ inputs.sonarqube-project-key }} \
+          -Dsonar.sources=${{ inputs.sonarqube-sources }}
 
     # Perform non-Java analysis on Windows 2022
     - name: Perform SonarQube Analysis
@@ -110,7 +117,8 @@ runs:
         -D"sonar.login=${{ inputs.sonarqube-token }}" `
         -D"sonar.host.url=${{ inputs.sonarqube-url }}" `
         -D"sonar.projectKey=${{ inputs.sonarqube-project-key }}" `
-        -D"sonar.projectName=${{ inputs.sonarqube-project-key }}" 
+        -D"sonar.projectName=${{ inputs.sonarqube-project-key }}" `
+        -D"sonar.sources=${{ inputs.sonarqube-sources }}"
 
     - name: Download SonarQube Report
       shell: bash

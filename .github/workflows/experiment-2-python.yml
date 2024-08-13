@@ -195,6 +195,20 @@ on:
         required: false
         default: "test,tests"
 
+      # SonarQube inputs
+      sonarqube-sources:
+        description: Source directories to scan
+        type: string
+        required: false
+        default: src
+
+      # Extra inputs
+      python-version:
+        description: Python version to use
+        type: string
+        required: false
+        default: 3.8
+
       # Extra inputs
       python-version:
         description: Python version to use
@@ -407,6 +421,7 @@ jobs:
           sonarqube-username: ${{ secrets.sonarqube-username }}
           sonarqube-password: ${{ secrets.sonarqube-password }}
           sonarqube-project-key: ${{ inputs.project-name }}
+          sonarqube-sources: ${{ inputs.sonarqube-sources }}
           artifact-name: sast-sonarqube-report-${{ matrix.os }}
           path: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
 
