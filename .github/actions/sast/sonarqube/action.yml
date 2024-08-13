@@ -79,7 +79,7 @@ runs:
     # Perform non-Java analysis on Ubuntu 22.04
     # Docker image only supports Ubuntu 22.04
     - name: Perform SonarQube Analysis
-      if: ${{ inputs.programming-language != 'java' && matrix.system.os == 'ubuntu-22.04' }}
+      if: ${{ inputs.programming-language != 'java' && runner.os == 'Linux' }}
       uses: SonarSource/sonarqube-scan-action@v2.0.2
       env:
         SONAR_TOKEN: ${{ inputs.sonarqube-token }}
@@ -92,7 +92,7 @@ runs:
 
     # Perform non-Java analysis on MacOS 14
     - name: Perform SonarQube Analysis
-      if: ${{ inputs.programming-language != 'java' && matrix.system.os == 'macos-14' }}
+      if: ${{ inputs.programming-language != 'java' && runner.os == 'macOS' }}
       shell: bash
       run: |
         sonar-scanner \
@@ -103,7 +103,7 @@ runs:
 
     # Perform non-Java analysis on Windows 2022
     - name: Perform SonarQube Analysis
-      if: ${{ inputs.programming-language != 'java' && matrix.system.os == 'windows-2022' }}
+      if: ${{ inputs.programming-language != 'java' && runner.os == 'Windows' }}
       shell: pwsh
       run: |
         sonar-scanner.bat `

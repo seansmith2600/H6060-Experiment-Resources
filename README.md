@@ -244,6 +244,7 @@ The following inputs are supported for the GitHub workflows:
 | **eclipse-steady-project-source-directories** | false    | string  |            | Project source directories to scan (separated by comma) |
 | **horusec-files-or-paths-to-ignore**          | false    | string  | **/test/** | Files or paths to ignore during the Horusec scan        |
 | **semgrep-files-or-paths-to-ignore**          | false    | string  | test,tests | Files or paths to ignore during the Semgrep scan        |
+| **python-version**                            | false    | string  | 3.8        | Python version to install                               |
 | **project-name**                              | false    | string  |            | Name of project to be scanned                           |
 | **build-artifact**                            | false    | string  |            | Name of project build artifact                          |
 | **build-directory**                           | false    | string  |            | Name of project build directory                         |
