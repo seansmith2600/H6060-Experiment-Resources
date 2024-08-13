@@ -63,7 +63,6 @@ runs:
       uses: Warchant/setup-sonar-scanner@v8
 
     - name: Setup Java JDK
-      if: ${{ inputs.programming-language == 'java' }}
       uses: actions/setup-java@v4.2.1
       with:
         distribution: temurin
