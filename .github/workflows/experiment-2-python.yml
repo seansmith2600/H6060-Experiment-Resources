@@ -1,4 +1,4 @@
-name: Experiment 1 - Java
+name: Experiment 2 - Python
 
 on:
   workflow_call:
@@ -465,14 +465,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install virtualenv setuptools
 
       - name: Run Eclipse Steady - ${{ matrix.os }}
         uses: ./experiment-resources-repository/.github/actions/sca/eclipse-steady/python
         with:
-          build-directory: ${{ inputs.build-directory }}
           eclipse-steady-workspace-token: ${{ inputs.eclipse-steady-workspace-token }}
           eclipse-steady-backend-url: ${{ secrets.eclipse-steady-host-url }}/backend
-          eclipse-steady-cia-url: ${{ secrets.eclipse-steady-host-url }}/cia
           eclipse-steady-application-group-id: ${{ inputs.eclipse-steady-application-group-id }}
           eclipse-steady-application-artifact-id: ${{ inputs.eclipse-steady-application-artifact-id }}
           eclipse-steady-application-version: ${{ inputs.eclipse-steady-application-version }}
