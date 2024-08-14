@@ -83,7 +83,7 @@ runs:
           --project ${{ inputs.project-name }} \
           --format ALL \
           --out ${{ inputs.path }}/owasp-reports \
-          --ossIndexRemoteErrorWarnOnly true
+          --ossIndexRemoteErrorWarnOnly true \
           --enableRetired \
           --enableExperimental \
           --prettyPrint \
