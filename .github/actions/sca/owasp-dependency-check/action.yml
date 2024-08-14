@@ -13,6 +13,16 @@ inputs:
     type: string
     required: true
 
+  oss_index_username:
+    description: The username for the OSS Index API
+    type: string
+    required: false
+
+  oss_index_password:
+    description: The password for the OSS Index API
+    type: string
+    required: false
+
   artifact-name:
     description: Name of the artifact to upload
     type: string
@@ -44,6 +54,7 @@ runs:
         chmod +x ./dependency-check/bin/dependency-check.sh
 
     - name: Perform OWASP Dependency Check Analysis
+      if: ${{ inputs.oss_index_username != '' && inputs.oss_index_password != '' }}
       shell: bash
       run: |
         mkdir -p ${{ inputs.path }}/owasp-reports
@@ -53,6 +64,26 @@ runs:
           --project ${{ inputs.project-name }} \
           --format ALL \
           --out ${{ inputs.path }}/owasp-reports \
+          --ossIndexUsername ${{ inputs.oss_index_username }} \
+          --ossIndexPassword ${{ inputs.oss_index_password }} \
+          --ossIndexRemoteErrorWarnOnly true
+          --enableRetired \
+          --enableExperimental \
+          --prettyPrint \
+          --disableYarnAudit
+
+    - name: Perform OWASP Dependency Check Analysis
+      if: ${{ inputs.oss_index_username == '' || inputs.oss_index_password == '' }}
+      shell: bash
+      run: |
+        mkdir -p ${{ inputs.path }}/owasp-reports
+        ./dependency-check/bin/dependency-check.sh \
+          --nvdApiKey ${{ inputs.nvd-api-key }} \
+          --scan ${{ inputs.path }} \
+          --project ${{ inputs.project-name }} \
+          --format ALL \
+          --out ${{ inputs.path }}/owasp-reports \
+          --ossIndexRemoteErrorWarnOnly true
           --enableRetired \
           --enableExperimental \
           --prettyPrint \

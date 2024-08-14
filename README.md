@@ -103,6 +103,8 @@ The workflow can be triggered using the following example snippet:
       honeycomb-api-key: ${{ secrets.HONEYCOMB_API_KEY }}
       eclipse-steady-host-url: ${{ secrets.ECLIPSE_STEADY_HOST_URL }}
       deepsource-api-key: ${{ secrets.DEEPSOURCE_API_KEY }}
+      oss-index-username: ${{ secrets.OSS_INDEX_USERNAME }}
+      oss-index-password: ${{ secrets.OSS_INDEX_PASSWORD }}
       semgrep-app-token: ${{ secrets.SEMGREP_APP_TOKEN }}
       snyk-token: ${{ secrets.SNYK_TOKEN }}
       sonarqube-username: ${{ secrets.SONARQUBE_USERNAME }}
@@ -152,6 +154,8 @@ GitHub Actions does not currently support the inheritance of secrets to reusable
 | `NVD_API_KEY`                  | API key to access the NVD API                        |
 | `OPENCVE_USERNAME`             | Username to authenticate with OpenCVE                |
 | `OPENCVE_PASSWORD`             | Password to authenticate with OpenCVE                |
+| `OSS_INDEX_USERNAME`           | Username for OSS Index                               |
+| `OSS_INDEX_PASSWORD`           | Password for OSS Index                               |
 | `SEMGREP_APP_TOKEN`            | Token to authenticate with Semgrep                   |
 | `SNYK_TOKEN`                   | Token to authenticate with Snyk                      |
 | `SONARQUBE_PASSWORD`           | Password to authenticate with SonarQube              |

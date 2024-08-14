@@ -38,6 +38,15 @@ on:
         description: URL of the Eclipse Steady host
         required: false
 
+      # OWASP Dependency Check secrets
+      oss-index-username:
+        description: Username used to authenticate with OSS Index
+        required: false
+
+      oss-index-password:
+        description: Password used to authenticate with OSS Index
+        required: false
+
       # Semgrep secrets
       semgrep-app-token:
         description: Token used to authenticate with Semgrep
@@ -586,6 +595,8 @@ jobs:
         with:
           nvd-api-key: ${{ secrets.nvd-api-key }}
           project-name: ${{ inputs.project-name }}
+          oss_index_username: ${{ secrets.oss-index-username }}
+          oss_index_password: ${{ secrets.oss-index-password }}
           artifact-name: sca-owasp-dependency-check-report-${{ matrix.os }}
           path: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
 
