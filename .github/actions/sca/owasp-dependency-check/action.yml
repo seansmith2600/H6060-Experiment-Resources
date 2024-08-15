@@ -64,7 +64,7 @@ runs:
       shell: bash
       run: |
         mkdir -p ${{ inputs.path }}/owasp-reports
-        if [[ "${{ inputs.properties_file }}" != "" ]]; then
+        if [[ "${{ inputs.properties-file }}" != "" ]]; then
             ./dependency-check/bin/dependency-check.sh \
               --nvdApiKey ${{ inputs.nvd-api-key }} \
               --scan ${{ inputs.path }} \
@@ -101,7 +101,7 @@ runs:
       shell: bash
       run: |
         mkdir -p ${{ inputs.path }}/owasp-reports
-        if [[ "${{ inputs.properties_file }}" != "" ]]; then
+        if [[ "${{ inputs.properties-file }}" != "" ]]; then
             ./dependency-check/bin/dependency-check.sh \
               --nvdApiKey ${{ inputs.nvd-api-key }} \
               --scan ${{ inputs.path }} \
