@@ -23,6 +23,11 @@ inputs:
     type: string
     required: false
 
+  properties-file:
+    description: The path to the OWASP properties file
+    type: string
+    required: false
+
   artifact-name:
     description: Name of the artifact to upload
     type: string
@@ -53,41 +58,75 @@ runs:
         unzip dependency-check
         chmod +x ./dependency-check/bin/dependency-check.sh
 
+    # If OSS Index credentials are provided (avoids strict rate limiting)
     - name: Perform OWASP Dependency Check Analysis
       if: ${{ inputs.oss_index_username != '' && inputs.oss_index_password != '' }}
       shell: bash
       run: |
         mkdir -p ${{ inputs.path }}/owasp-reports
-        ./dependency-check/bin/dependency-check.sh \
-          --nvdApiKey ${{ inputs.nvd-api-key }} \
-          --scan ${{ inputs.path }} \
-          --project ${{ inputs.project-name }} \
-          --format ALL \
-          --out ${{ inputs.path }}/owasp-reports \
-          --ossIndexUsername ${{ inputs.oss_index_username }} \
-          --ossIndexPassword ${{ inputs.oss_index_password }} \
-          --ossIndexRemoteErrorWarnOnly true \
-          --enableRetired \
-          --enableExperimental \
-          --prettyPrint \
-          --disableYarnAudit
+        if [[ "${{ inputs.properties_file }}" != "" ]]; then
+            ./dependency-check/bin/dependency-check.sh \
+              --nvdApiKey ${{ inputs.nvd-api-key }} \
+              --scan ${{ inputs.path }} \
+              --project ${{ inputs.project-name }} \
+              --format ALL \
+              --out ${{ inputs.path }}/owasp-reports \
+              --ossIndexUsername ${{ inputs.oss_index_username }} \
+              --ossIndexPassword ${{ inputs.oss_index_password }} \
+              --ossIndexRemoteErrorWarnOnly true \
+              --enableRetired \
+              --enableExperimental \
+              --prettyPrint \
+              --disableYarnAudit \
+              --propertyfile ${{ inputs.path }}/${{ inputs.properties_file }}
+        else
+            ./dependency-check/bin/dependency-check.sh \
+              --nvdApiKey ${{ inputs.nvd-api-key }} \
+              --scan ${{ inputs.path }} \
+              --project ${{ inputs.project-name }} \
+              --format ALL \
+              --out ${{ inputs.path }}/owasp-reports \
+              --ossIndexUsername ${{ inputs.oss_index_username }} \
+              --ossIndexPassword ${{ inputs.oss_index_password }} \
+              --ossIndexRemoteErrorWarnOnly true \
+              --enableRetired \
+              --enableExperimental \
+              --prettyPrint \
+              --disableYarnAudit
+        fi
 
+    # If OSS Index credentials are not provided
     - name: Perform OWASP Dependency Check Analysis
       if: ${{ inputs.oss_index_username == '' || inputs.oss_index_password == '' }}
       shell: bash
       run: |
         mkdir -p ${{ inputs.path }}/owasp-reports
-        ./dependency-check/bin/dependency-check.sh \
-          --nvdApiKey ${{ inputs.nvd-api-key }} \
-          --scan ${{ inputs.path }} \
-          --project ${{ inputs.project-name }} \
-          --format ALL \
-          --out ${{ inputs.path }}/owasp-reports \
-          --ossIndexRemoteErrorWarnOnly true \
-          --enableRetired \
-          --enableExperimental \
-          --prettyPrint \
-          --disableYarnAudit
+        if [[ "${{ inputs.properties_file }}" != "" ]]; then
+            ./dependency-check/bin/dependency-check.sh \
+              --nvdApiKey ${{ inputs.nvd-api-key }} \
+              --scan ${{ inputs.path }} \
+              --project ${{ inputs.project-name }} \
+              --format ALL \
+              --out ${{ inputs.path }}/owasp-reports \
+              --ossIndexRemoteErrorWarnOnly true \
+              --enableRetired \
+              --enableExperimental \
+              --prettyPrint \
+              --disableYarnAudit \
+              --propertyfile ${{ inputs.path }}/${{ inputs.properties_file }}
+        else
+            ./dependency-check/bin/dependency-check.sh \
+              --nvdApiKey ${{ inputs.nvd-api-key }} \
+              --scan ${{ inputs.path }} \
+              --project ${{ inputs.project-name }} \
+              --format ALL \
+              --out ${{ inputs.path }}/owasp-reports \
+              --ossIndexRemoteErrorWarnOnly true \
+              --enableRetired \
+              --enableExperimental \
+              --prettyPrint \
+              --disableYarnAudit
+        fi
 
     - name: Upload OWASP Dependency Check Report
       uses: actions/upload-artifact@v4

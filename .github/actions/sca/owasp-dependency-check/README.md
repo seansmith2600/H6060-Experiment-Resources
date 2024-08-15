@@ -31,14 +31,15 @@ NVD API key is required to access the NVD API. A key can be requested using http
 
 ## Inputs
 
-| name                   | required | type   | default                           | description                                 |
-|------------------------|----------|--------|-----------------------------------|---------------------------------------------|
-| **nvd-api-key**        | true     | string |                                   | API Key to access the NVD API               |
-| **project-name**       | true     | string |                                   | Name of the project being scanned           |
-| **oss-index-username** | false    | string |                                   | Username for OSS Index                      |
-| **oss-index-password** | false    | string |                                   | Password for OSS Index                      |
-| **artifact-name**      | false    | string | sca-owasp-dependency-check-report | Name of the artifact to upload              |
-| **path**               | false    | string | ${{ github.workspace }}           | Path to run the OWASP Dependency Check scan |
+| name                   | required | type   | default                           | description                                        |
+|------------------------|----------|--------|-----------------------------------|----------------------------------------------------|
+| **nvd-api-key**        | true     | string |                                   | API Key to access the NVD API                      |
+| **project-name**       | true     | string |                                   | Name of the project being scanned                  |
+| **oss-index-username** | false    | string |                                   | Username for OSS Index                             |
+| **oss-index-password** | false    | string |                                   | Password for OSS Index                             |
+| **properties-file**    | false    | string |                                   | Path to the OWASP Dependency Check properties file |
+| **artifact-name**      | false    | string | sca-owasp-dependency-check-report | Name of the artifact to upload                     |
+| **path**               | false    | string | ${{ github.workspace }}           | Path to run the OWASP Dependency Check scan        |
 
 ## Build Artifacts
 
