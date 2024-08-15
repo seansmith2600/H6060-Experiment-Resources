@@ -78,7 +78,7 @@ runs:
               --enableExperimental \
               --prettyPrint \
               --disableYarnAudit \
-              --propertyfile ${{ inputs.path }}/${{ inputs.properties_file }}
+              --propertyfile ${{ inputs.path }}/${{ inputs.properties-file }}
         else
             ./dependency-check/bin/dependency-check.sh \
               --nvdApiKey ${{ inputs.nvd-api-key }} \
@@ -113,7 +113,7 @@ runs:
               --enableExperimental \
               --prettyPrint \
               --disableYarnAudit \
-              --propertyfile ${{ inputs.path }}/${{ inputs.properties_file }}
+              --propertyfile ${{ inputs.path }}/${{ inputs.properties-file }}
         else
             ./dependency-check/bin/dependency-check.sh \
               --nvdApiKey ${{ inputs.nvd-api-key }} \
