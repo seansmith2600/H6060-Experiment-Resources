@@ -28,7 +28,7 @@ An action to configure and run a SAST Horusec scan.
 
 | name                         | required | type   | default                 | description                              |
 |------------------------------|----------|--------|-------------------------|------------------------------------------|
-| **files-or-paths-to-ignore** | false    | string | **/test/**              | Files or paths to ignore during the scan |
+| **files-or-paths-to-ignore** | false    | string | \*\*/test/\*\*          | Files or paths to ignore during the scan |
 | **artifact-name**            | false    | string | sast-horusec-report     | Name of the artifact to upload           |
 | **path**                     | false    | string | ${{ github.workspace }} | Path to run the Horusec scan             |
 

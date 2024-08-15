@@ -160,6 +160,12 @@ on:
         required: false
         default: "**/test/**"
 
+      # OWASP Dependency Check inputs
+      owasp-properties-file:
+        description: OWASP Dependency Check properties file
+        type: string
+        required: false
+
       # Semgrep inputs
       semgrep-files-or-paths-to-ignore:
         description: Paths to ignore during the Semgrep scan
@@ -495,6 +501,7 @@ jobs:
           project-name: ${{ inputs.project-name }}
           oss_index_username: ${{ secrets.oss-index-username }}
           oss_index_password: ${{ secrets.oss-index-password }}
+          properties-file: ${{ inputs.owasp-properties-file }}
           artifact-name: sca-owasp-dependency-check-report-${{ matrix.os }}
           path: ${{ env.CHECKOUT_PROJECT_REPO_PATH }}
 
